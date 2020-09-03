@@ -1,0 +1,37 @@
+package com.ketoberry.modules.account.entity;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Getter
+@EqualsAndHashCode(of = "id")
+public class Account {
+
+    @Id @GeneratedValue
+    private Long id;
+
+    @Column(unique = true)
+    private String email;
+
+    @Column(unique = true)
+    private String nickname;
+
+    private String password;
+
+    private boolean emailVerified;
+
+    private String emailToken;
+
+    private LocalDateTime createdDate;
+
+    @Enumerated(EnumType.STRING)
+    private AccountGrade grade;
+
+    @Enumerated(EnumType.STRING)
+    private AccountType type;
+
+}
