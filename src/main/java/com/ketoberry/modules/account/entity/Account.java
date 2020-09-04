@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -13,6 +14,8 @@ public class Account {
 
     @Id @GeneratedValue
     private Long id;
+
+    private String name;
 
     @Column(unique = true)
     private String email;
@@ -26,6 +29,8 @@ public class Account {
 
     private String emailToken;
 
+    private LocalDateTime emailTokenGeneratedAt;
+
     private LocalDateTime createdDate;
 
     @Enumerated(EnumType.STRING)
@@ -34,4 +39,21 @@ public class Account {
     @Enumerated(EnumType.STRING)
     private AccountType type;
 
+    public void generateEmailCheckToken() {
+        this.emailToken = UUID.randomUUID().toString();
+        this.emailTokenGeneratedAt = LocalDateTime.now();
+    }
+
+    public void completeSignUp() {
+        this.emailVerified = true;
+        this.createdDate = LocalDateTime.now();
+    }
+
+    public boolean isValidToken(String token) {
+        return this.emailToken.equals(token);
+    }
+
+    public boolean canSendConfirmEmail() {
+        return this.emailTokenGeneratedAt.isBefore(LocalDateTime.now().minusMinutes(3));
+    }
 }

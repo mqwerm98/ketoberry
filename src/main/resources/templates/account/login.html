@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="common.html :: head"></div>
+    <link href="css/account.css" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="common.html :: top-bar"></div>
+<div class="container">
+    <br/>
+    <div id="login-box">
+        <p>Login</p>
+        <div id="login-box-inner">
+            <form action="#" th:action="@{/login}" method="post" novalidate>
+                <input type="text" name="username" placeholder="your@email.com" required/>
+                <input type="password" name="password" required/>
+
+                <div id="login-box-inner-rememberme">
+                    <input type="checkbox" id="rememberMe" name="remember-me" checked>
+                    <label for="rememberMe" aria-describedby="rememberMeHelp">로그인 유지</label>
+                </div>
+
+                <button class="btn" type="submit" aria-describedby="submitHelp">로그인</button>
+            </form>
+            <div id="login-box-inner-bottom-btn">
+                <a href="#" th:href="@{/sign-up}">회원가입</a>
+                <a href="#" th:href="@{/sign-up}">비밀번호 찾기</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<div th:replace="common.html :: footer"></div>
+<script th:replace="common.html :: form-validation"></script>
+</html>

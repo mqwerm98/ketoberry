@@ -16,6 +16,23 @@ spring:
         format_sql: true
         default_batch_fetch_size: 100
 
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: test
+    password: test
+    properties:
+      mail:
+        smtp:
+          auth: true
+          timeout: 5000
+          starttls.enable: true
+
 logging:
   level:
     org.hibernate.SQL: debug
@@ -26,3 +43,6 @@ server:
     encoding:
       charset: UTF-8
       force: true
+
+app:
+  host: http://localhost:8080

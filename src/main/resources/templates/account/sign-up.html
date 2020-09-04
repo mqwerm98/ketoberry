@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="common.html :: head"></div>
+    <link href="css/account.css" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="common.html :: top-bar"></div>
+<div class="container">
+    <br/>
+    <div id="sign-up-box">
+        <p>회원가입</p>
+        <div id="sign-up-box-inner">
+            <form action="#" th:action="@{/sign-up}" th:object="${signUpDto}" method="post" novalidate>
+                <label for="name">이름</label>
+                <input type="text" id="name" name="name" th:field="*{name}" placeholder="김베리" required/>
+
+                <label for="email">이메일</label>
+                <input type="text" id="email" name="email" th:field="*{email}" placeholder="your@email.com" required/>
+
+                <label for="nickname">닉네임</label>
+                <input type="text" id="nickname" name="nickname" th:field="*{nickname}" placeholder="ketoberry"
+                       required/>
+
+                <label for="password">비밀번호</label>
+                <input id="password" type="password" th:field="*{password}" aria-describedby="passwordHelp" required
+                       minlength="8" maxlength="50">
+
+                <label for="password-check">비밀번호 확인</label>
+                <input id="password-check" type="password" required minlength="8" maxlength="50">
+
+                <button type="submit" aria-describedby="submitHelp">가입하기</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<div th:replace="common.html :: footer"></div>
+<script th:replace="common.html :: form-validation"></script>
+</html>

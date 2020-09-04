@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="common.html :: head"></div>
+    <link href="css/account.css" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="common.html :: top-bar"></div>
+<div class="container">
+    <br/>
+    <div th:if="${error}">
+        <p>키토베리 이메일 로그인</p>
+        <div role="alert">
+            이메일이 정확하지 않거나 가입하지 않은 이메일 입니다.
+        </div>
+        <p th:text="${email}">your@email.com</p>
+    </div>
+
+    <div th:if="${error == null}">
+        <p>키토베리 이메일 로그인</p>
+
+        <h2>이메일을 확인하세요. 로그인 링크를 보냈습니다.</h2>
+        <p th:text="${email}">your@email.com</p>
+        <small>이메일을 확인해야 로그인 할 수 있습니다.</small>
+    </div>
+</div>
+</body>
+</html>

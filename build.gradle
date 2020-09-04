@@ -35,7 +35,13 @@ dependencies {
     }
     testImplementation 'org.springframework.security:spring-security-test'
 
+    compile group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.7.Final'
+
     compile group: 'org.modelmapper', name: 'modelmapper', version: '2.1.1'
+
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '1.2.0.RELEASE'
 }
 
 test {
