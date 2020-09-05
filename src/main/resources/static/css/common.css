@@ -17,6 +17,10 @@ body {
     background-color: #EEECF8;
 }
 
+p {
+    margin: 0;
+}
+
 button {
     cursor: pointer;
 }
@@ -38,7 +42,7 @@ button {
     float: right;
 }
 
-.top-bar #top-bar-right > a{
+.top-bar #top-bar-right > a {
     font-size: 1.1em;
     line-height: 70px;
     vertical-align: middle;
@@ -46,6 +50,17 @@ button {
     margin-right: 50px;
     font-weight: bold;
     color: #FFFFFF;
+}
+
+.top-bar #top-bar-right > span > a {
+    font-size: 1.1em;
+    line-height: 70px;
+    vertical-align: middle;
+    float: right;
+    margin-right: 30px;
+    font-weight: bold;
+    color: #FFFFFF;
+    padding: 0;
 }
 
 .top-menu {

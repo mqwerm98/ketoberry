@@ -10,7 +10,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @EqualsAndHashCode(of = "id")
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Account {
 
     @Id @GeneratedValue
@@ -30,7 +30,7 @@ public class Account {
 
     private String emailToken;
 
-    private LocalDateTime emailTokenGeneratedAt;
+    private LocalDateTime emailTokenGeneratedDate;
 
     private LocalDateTime createdDate;
 
@@ -45,11 +45,13 @@ public class Account {
         this.email = dto.getEmail();
         this.nickname = dto.getNickname();
         this.password = dto.getPassword();
+        this.grade = AccountGrade.STRAW;
+        this.type = AccountType.USER;
     }
 
     public void generateEmailCheckToken() {
         this.emailToken = UUID.randomUUID().toString();
-        this.emailTokenGeneratedAt = LocalDateTime.now();
+        this.emailTokenGeneratedDate = LocalDateTime.now();
     }
 
     public void completeSignUp() {
@@ -62,6 +64,6 @@ public class Account {
     }
 
     public boolean canSendConfirmEmail() {
-        return this.emailTokenGeneratedAt.isBefore(LocalDateTime.now().minusMinutes(3));
+        return this.emailTokenGeneratedDate.isBefore(LocalDateTime.now().minusMinutes(3));
     }
 }

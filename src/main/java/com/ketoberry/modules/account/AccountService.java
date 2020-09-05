@@ -12,6 +12,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +26,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class AccountService {
+public class AccountService implements UserDetailsService {
 
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
@@ -101,5 +104,17 @@ public class AccountService {
             throw new IllegalArgumentException(nickname + "에 해당하는 사용자가 없습니다");
         }
         return account;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Account account = accountRepository.findByEmail(email);
+
+        if (account == null) {
+            throw new UsernameNotFoundException(email);
+        }
+
+        return new UserAccount(account);
     }
 }

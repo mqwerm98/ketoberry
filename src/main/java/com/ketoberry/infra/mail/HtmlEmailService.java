@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 
 @Profile({"local", "dev"})
 @Component
@@ -26,13 +27,13 @@ public class HtmlEmailService implements EmailService {
         try {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
             mimeMessageHelper.setTo(emailmessage.getTo());
-            mimeMessageHelper.setFrom(appProperties.getMailFrom());
+            mimeMessageHelper.setFrom(appProperties.getMailFrom(), "키토베리");
             mimeMessageHelper.setSubject(emailmessage.getSubject());
             mimeMessageHelper.setText(emailmessage.getMessage(), true);
             javaMailSender.send(mimeMessage);
 
             log.info("sent email : {}", emailmessage.getMessage());
-        } catch (MessagingException e) {
+        } catch (MessagingException | UnsupportedEncodingException e) {
             log.error("failed to send email", e);
             throw new RuntimeException(e);
         }

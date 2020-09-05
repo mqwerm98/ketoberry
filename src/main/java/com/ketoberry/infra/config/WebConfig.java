@@ -23,9 +23,9 @@ public class WebConfig implements WebMvcConfigurer {
                 .flatMap(StaticResourceLocation::getPatterns)
                 .collect(Collectors.toList());
 
-//        // interceptor에 해당 패턴은 제외하겠다 (static 리소스 요청에는 notificationInterceptor 적용하지 않도록)
-//        registry.addInterceptor(notificationInterceptor)
-//                .excludePathPatterns(staticResourcesPath);
+        // interceptor에 해당 패턴은 제외하겠다 (static 리소스 요청에는 notificationInterceptor 적용하지 않도록)
+        registry.addInterceptor(notificationInterceptor)
+                .excludePathPatterns(staticResourcesPath);
 
     }
 }
