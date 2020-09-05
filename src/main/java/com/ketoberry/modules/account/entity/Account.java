@@ -1,7 +1,7 @@
 package com.ketoberry.modules.account.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import com.ketoberry.modules.account.dto.SignUpDto;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,6 +10,7 @@ import java.util.UUID;
 @Entity
 @Getter
 @EqualsAndHashCode(of = "id")
+@NoArgsConstructor
 public class Account {
 
     @Id @GeneratedValue
@@ -38,6 +39,13 @@ public class Account {
 
     @Enumerated(EnumType.STRING)
     private AccountType type;
+
+    public Account(SignUpDto dto) {
+        this.name = dto.getName();
+        this.email = dto.getEmail();
+        this.nickname = dto.getNickname();
+        this.password = dto.getPassword();
+    }
 
     public void generateEmailCheckToken() {
         this.emailToken = UUID.randomUUID().toString();

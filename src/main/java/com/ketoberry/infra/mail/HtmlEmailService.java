@@ -1,5 +1,6 @@
 package com.ketoberry.infra.mail;
 
+import com.ketoberry.infra.config.AppProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
@@ -17,6 +18,7 @@ import javax.mail.internet.MimeMessage;
 public class HtmlEmailService implements EmailService {
 
     private final JavaMailSender javaMailSender;
+    private final AppProperties appProperties;
 
     @Override
     public void sendEmail(Emailmessage emailmessage) {
@@ -24,6 +26,7 @@ public class HtmlEmailService implements EmailService {
         try {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, "UTF-8");
             mimeMessageHelper.setTo(emailmessage.getTo());
+            mimeMessageHelper.setFrom(appProperties.getMailFrom());
             mimeMessageHelper.setSubject(emailmessage.getSubject());
             mimeMessageHelper.setText(emailmessage.getMessage(), true);
             javaMailSender.send(mimeMessage);

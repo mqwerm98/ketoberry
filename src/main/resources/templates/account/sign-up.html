@@ -7,27 +7,57 @@
 <body>
 <div th:replace="common.html :: top-bar"></div>
 <div class="container">
-    <br/>
     <div id="sign-up-box">
         <p>회원가입</p>
         <div id="sign-up-box-inner">
-            <form action="#" th:action="@{/sign-up}" th:object="${signUpDto}" method="post" novalidate>
-                <label for="name">이름</label>
-                <input type="text" id="name" name="name" th:field="*{name}" placeholder="김베리" required/>
+            <form id="sign-up-box-form" class="needs-validation" action="#" th:action="@{/sign-up}"
+                  th:object="${signUpDto}" method="post" novalidate>
+                <div class="form-group">
+                    <label for="name">이름</label>
+                    <input type="text" id="name" name="name" th:field="*{name}" placeholder="김베리" minlength="2"
+                           maxlength="50" required/>
+                    <small class="invalid-feedback">이름을 입력하세요.</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name
+                        Error</small>
+                </div>
 
-                <label for="email">이메일</label>
-                <input type="text" id="email" name="email" th:field="*{email}" placeholder="your@email.com" required/>
+                <div class="form-group">
+                    <label for="email">이메일</label>
+                    <input type="email" id="email" name="email" th:field="*{email}" placeholder="your@email.com"
+                           required/>
+                    <small class="invalid-feedback">이메일을 입력하세요.</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email
+                        Error</small>
+                </div>
 
-                <label for="nickname">닉네임</label>
-                <input type="text" id="nickname" name="nickname" th:field="*{nickname}" placeholder="ketoberry"
-                       required/>
+                <div class="form-group">
+                    <label for="nickname">닉네임</label>
+                    <input type="text" id="nickname" name="nickname" th:field="*{nickname}"
+                           aria-describedby="nicknameHelp" pattern="^[ㄱ-ㅎ가-힣a-z0-9]{2,20}$"
+                           placeholder="ketoberry" minlength="2" maxlength="20" required/>
+                    <small id="nicknameHelp" class="form-text text-muted">공백없이 문자와 숫자로만 3자 이상 20자 이내로 입력해 주세요.</small>
+                    <small class="invalid-feedback">닉네임을 입력하세요.</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('nickname')}"
+                           th:errors="*{nickname}">Nickname Error</small>
+                </div>
 
-                <label for="password">비밀번호</label>
-                <input id="password" type="password" th:field="*{password}" aria-describedby="passwordHelp" required
-                       minlength="8" maxlength="50">
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <input id="password" type="password" th:field="*{password}" aria-describedby="passwordHelp"
+                           minlength="8" maxlength="50" required/>
+                    <small id="passwordHelp" class="form-text text-muted">8자 이상 50자 이내로 입력해 주세요. <br/>영문자, 숫자, 특수기호를 사용할
+                        수 있으며 공백은 사용할 수
+                        없습니다.</small>
+                    <small class="invalid-feedback">비밀번호를 입력하세요.</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('password')}"
+                           th:errors="*{password}">Password Error</small>
+                </div>
 
-                <label for="password-check">비밀번호 확인</label>
-                <input id="password-check" type="password" required minlength="8" maxlength="50">
+                <div class="form-group">
+                    <label for="password-check">비밀번호 확인</label>
+                    <input id="password-check" type="password" minlength="8" maxlength="50" required/>
+                    <small id="invalid-password">비밀번호가 다릅니다.</small>
+                </div>
 
                 <button type="submit" aria-describedby="submitHelp">가입하기</button>
             </form>
@@ -37,4 +67,27 @@
 </body>
 <div th:replace="common.html :: footer"></div>
 <script th:replace="common.html :: form-validation"></script>
+<script>
+    const password = document.getElementById("password");
+    const passwordCheck = document.getElementById("password-check");
+    password.addEventListener('input', inputPassword);
+    passwordCheck.addEventListener('input', inputPassword);
+
+    const name = document.getElementById("name");
+    name.addEventListener('input', inputName);
+
+    function inputPassword() {
+        noSpaceForm(this);
+        const ip = document.getElementById("invalid-password");
+        if (password.value != null && password.value !== passwordCheck.value) {
+            ip.style.display = 'block';
+        } else {
+            ip.style.display = 'none';
+        }
+    }
+
+    function inputName() {
+        noDoubleSpaceForm(this);
+    }
+</script>
 </html>

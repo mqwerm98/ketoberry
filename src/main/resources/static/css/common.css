@@ -1,6 +1,7 @@
 * {
     padding: 0;
     margin: 0;
+    -webkit-box-sizing: content-box;
 }
 
 a {
@@ -8,20 +9,27 @@ a {
     color: black;
 }
 
+a :hover {
+    text-decoration: none !important;
+}
+
+body {
+    background-color: #EEECF8;
+}
+
 button {
     cursor: pointer;
 }
 
 .top-bar {
-    background-color: #AAF0D1;
+    background-color: #BBB5E0;
     height: 70px;
 }
 
 .top-bar #top-bar-logo {
-    font-size: 1.5em;
-    line-height: 70px;
-    vertical-align: middle;
-    margin-left: 50px;
+    width: 50px;
+    height: auto;
+    margin: 10px 0 5px 20px;
 }
 
 .top-bar #top-bar-right {
@@ -58,7 +66,7 @@ button {
 }
 
 .top-menu > a :hover {
-    background-color: #AAF0D1;
+    background-color: #BBB5E0;
     border-radius: 100%;
     color: white;
 }
@@ -90,10 +98,5 @@ button {
 }
 
 .container {
-    background-color: #F8F9FA;
     min-height: 800px;
-}
-
-.btn {
-
 }

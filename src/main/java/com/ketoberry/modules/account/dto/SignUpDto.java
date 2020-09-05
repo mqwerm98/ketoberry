@@ -20,8 +20,8 @@ public class SignUpDto {
     private String email;
 
     @NotBlank
-    @Length(min = 3, max = 20)
-    @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9_-]{3,20}$")
+    @Length(min = 2, max = 20)
+    @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9]{2,20}$")
     private String nickname;
 
     private String password;

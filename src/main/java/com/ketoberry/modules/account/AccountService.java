@@ -1,5 +1,6 @@
 package com.ketoberry.modules.account;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ketoberry.infra.config.AppProperties;
 import com.ketoberry.infra.mail.EmailService;
 import com.ketoberry.infra.mail.Emailmessage;
@@ -25,7 +26,6 @@ import java.util.List;
 public class AccountService {
 
     private final AccountRepository accountRepository;
-    private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
     private final AppProperties appProperties;
     private final TemplateEngine templateEngine;
@@ -33,7 +33,7 @@ public class AccountService {
 
     public Account signUp(SignUpDto dto) {
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
-        Account account = modelMapper.map(dto, Account.class);
+        Account account = new Account(dto);
         account.generateEmailCheckToken();
 
         Account newAccount = accountRepository.save(account);
