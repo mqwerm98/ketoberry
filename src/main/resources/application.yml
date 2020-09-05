@@ -24,14 +24,15 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: test
-    password: test
+    username: ketoberry3@gmail.com
+    password: password
     properties:
       mail:
         smtp:
           auth: true
           timeout: 5000
-          starttls.enable: true
+          starttls:
+            enable: true
 
 logging:
   level:
@@ -46,3 +47,4 @@ server:
 
 app:
   host: http://localhost:8080
+  mail-from: ketoberry3@gmail.com
