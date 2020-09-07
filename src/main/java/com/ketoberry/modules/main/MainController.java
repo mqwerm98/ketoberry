@@ -1,6 +1,6 @@
 package com.ketoberry.modules.main;
 
-import com.ketoberry.modules.account.AccountRepository;
+import com.ketoberry.modules.account.repository.AccountRepository;
 import com.ketoberry.modules.account.CurrentAccount;
 import com.ketoberry.modules.account.entity.Account;
 import lombok.RequiredArgsConstructor;

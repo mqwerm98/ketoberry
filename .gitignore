@@ -33,5 +33,9 @@ out/
 ### VS Code ###
 .vscode/
 
+### NPM ###
+src/main/resources/static/node_modules
+src/main/resources/static/node
+
 ### My ignore ###
 src/main/resources/application.yml

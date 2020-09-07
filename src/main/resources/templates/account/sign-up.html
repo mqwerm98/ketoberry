@@ -15,7 +15,7 @@
                 <div class="form-group">
                     <label for="name">이름</label>
                     <input type="text" id="name" name="name" th:field="*{name}" placeholder="김베리" minlength="2"
-                           maxlength="50" class="form-control" equired/>
+                           maxlength="50" class="form-control" required/>
                     <small class="invalid-feedback">이름을 입력하세요.</small>
                     <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name
                         Error</small>

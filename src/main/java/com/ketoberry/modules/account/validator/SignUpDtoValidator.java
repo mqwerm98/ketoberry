@@ -1,6 +1,6 @@
 package com.ketoberry.modules.account.validator;
 
-import com.ketoberry.modules.account.AccountRepository;
+import com.ketoberry.modules.account.repository.AccountRepository;
 import com.ketoberry.modules.account.dto.SignUpDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

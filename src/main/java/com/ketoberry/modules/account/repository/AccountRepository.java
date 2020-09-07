@@ -1,4 +1,4 @@
-package com.ketoberry.modules.account;
+package com.ketoberry.modules.account.repository;
 
 import com.ketoberry.modules.account.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;

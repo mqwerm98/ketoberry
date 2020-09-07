@@ -1,14 +1,13 @@
-package com.ketoberry.modules.account;
+package com.ketoberry.modules.account.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ketoberry.infra.config.AppProperties;
 import com.ketoberry.infra.mail.EmailService;
 import com.ketoberry.infra.mail.Emailmessage;
 import com.ketoberry.modules.account.dto.SignUpDto;
 import com.ketoberry.modules.account.entity.Account;
 import com.ketoberry.modules.account.entity.UserAccount;
+import com.ketoberry.modules.account.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,7 +44,7 @@ public class AccountService implements UserDetailsService {
         return newAccount;
     }
 
-    void sendSignUpConfirmEmail(Account account) {
+    public void sendSignUpConfirmEmail(Account account) {
         Context context = new Context();
         context.setVariable("link", "/check-email-token?token=" + account.getEmailToken() + "&email=" + account.getEmail());
         context.setVariable("nickname", account.getNickname());
@@ -68,7 +67,7 @@ public class AccountService implements UserDetailsService {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                 new UserAccount(account),
                 account.getPassword(),
-                List.of(new SimpleGrantedAuthority("USER")));
+                List.of(new SimpleGrantedAuthority(account.getType().toString())));
         SecurityContextHolder.getContext().setAuthentication(token);
     }
 

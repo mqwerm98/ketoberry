@@ -66,4 +66,8 @@ public class Account {
     public boolean canSendConfirmEmail() {
         return this.emailTokenGeneratedDate.isBefore(LocalDateTime.now().minusMinutes(3));
     }
+
+    public boolean isAdmin() {
+        return this.type == AccountType.ADMIN;
+    }
 }

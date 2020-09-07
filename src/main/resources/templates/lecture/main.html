@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <div th:replace="common.html :: head"></div>
+    <link href="css/lecture.css" rel="stylesheet"/>
+</head>
+<div th:replace="common.html :: top-bar"></div>
+<br/>
+<div th:replace="common.html :: top-menu"></div>
+<div class="container">
+    <div id="new-lecture-btn-box" sec:authorize="hasAuthority('ADMIN')">
+        <a id="new-lecture-btn" class="no-under" href="/lecture/form">등록하기</a>
+    </div>
+
+    <div class="cleaner"></div>
+    <div class="row">
+        <div class="lecture-list col-sm-4 col-xs-6" th:each="lecture: ${lectures}">
+            <div class="lecture-list-inner">
+                <div class="lecture-list-title">
+                    <span th:text="${lecture.title}"></span>
+                </div>
+                <div class="lecture-list-bottom">
+                    <i class="fa fa-heart-o"></i>
+                    <span th:text="${lecture.likeNum}"></span>
+                    <span class="lecture-list-bottom-date"
+                          th:text="${#temporals.format(lecture.createdDate, 'yy.MM.dd')}"></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="cleaner"></div>
+</div>
+<div th:replace="common.html :: footer"></div>
+<script th:replace="common.html :: form-validation"></script>
+</html>

@@ -1,5 +1,8 @@
-package com.ketoberry.modules.account;
+package com.ketoberry.modules.account.controller;
 
+import com.ketoberry.modules.account.repository.AccountRepository;
+import com.ketoberry.modules.account.service.AccountService;
+import com.ketoberry.modules.account.CurrentAccount;
 import com.ketoberry.modules.account.dto.SignUpDto;
 import com.ketoberry.modules.account.entity.Account;
 import com.ketoberry.modules.account.validator.SignUpDtoValidator;

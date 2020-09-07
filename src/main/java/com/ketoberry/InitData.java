@@ -16,10 +16,10 @@ public class InitData {
 
     private final InitService initService;
 
-    @PostConstruct
-    public void init() {
-        initService.createRoomUser();
-    }
+//    @PostConstruct
+//    public void init() {
+//        initService.createRoomUser();
+//    }
 
     @Component
     @Transactional

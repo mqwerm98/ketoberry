@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="common.html :: head"></div>
+    <link href="../css/lecture.css" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="common.html :: top-bar"></div>
+<br/>
+<div th:replace="common.html :: top-menu"></div>
+<div class="container">
+    <div id="new-lecture-box">
+        <p>강의 등록</p>
+        <div id="new-lecture-box-inner">
+            <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                <p>입력한 값이 정확하지 않습니다.</p>
+            </div>
+
+            <form class="needs-validation" action="#" th:object="${lectureDto}" th:action="@{/lecture}" method="post"
+                   novalidate>
+                <div class="form-group">
+                    <input type="text" id="title" name="title" th:field="*{title}" class="form-control" placeholder="제목"
+                           minlength="1" maxlength="100" required/>
+                    <small class="invalid-feedback">제목을 입력하세요.</small>
+                </div>
+
+                <div id="new-lecture-box-inner-open">
+                    <input type="checkbox" id="open" th:field="*{open}" name="open" checked/>
+                    <label for="open">공개</label>
+                </div>
+
+                <input id="tags" type="text" name="tags" placeholder="태그" th:value="${#strings.listJoin(tags, ',')}"
+                       class="tagify-outside" aria-describedby="tagHelp"/>
+
+                <button class="btn" type="submit">등록</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<div th:replace="common.html :: footer"></div>
+<script th:replace="common.html :: form-validation"></script>
+<script src="/node_modules/@yaireo/tagify/dist/tagify.min.js"></script>
+<script type="application/javascript" th:inline="javascript">
+    $(function () {
+        $('#title').keydown(function() {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+            }
+        });
+
+        var tagInput = document.querySelector("#tags");
+        var tagify = new Tagify(tagInput, {
+            originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
+        })
+
+        // add a class to Tagify's input element
+        tagify.DOM.input.classList.add('form-control');
+        // re-place Tagify's input element outside of the  element (tagify.DOM.scope), just before it
+        tagify.DOM.scope.parentNode.insertBefore(tagify.DOM.input, tagify.DOM.scope);
+    });
+</script>
+</html>
