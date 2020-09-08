@@ -4,9 +4,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -18,8 +16,8 @@ public class LectureDto {
 
     private boolean open = false;
 
-    private Set<String> tags = new HashSet<>();
+    private String content;
 
-    private List<LectureCardDto> cards = new ArrayList<>();
+    private Set<String> tags = new HashSet<>();
 
 }

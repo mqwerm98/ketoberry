@@ -18,7 +18,7 @@ a :hover {
 }
 
 body {
-    background-color: #EEECF8;
+    background-color: #F7F8F9;
 }
 
 p {
@@ -32,12 +32,25 @@ button {
 .top-bar {
     background-color: #BBB5E0;
     height: 70px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 5px 5px 20px #BDBCC2;
+}
+
+.top-bar i {
+    font-size: 1.5em;
+    color: white;
+    margin-left: 30px;
+    line-height: 70px;
+    vertical-align: middle;
+    cursor: pointer;
 }
 
 .top-bar #top-bar-logo {
     width: 50px;
     height: auto;
-    margin: 10px 0 5px 20px;
+    margin: 5px 0 5px 20px;
 }
 
 .top-bar #top-bar-right {
@@ -67,41 +80,28 @@ button {
     padding: 0;
 }
 
-.top-menu {
-    height: 100px;
-    width: 370px;
-    margin: 10px auto;
+.left-menu {
+    width: 70px;
+    background-color: #80DF80;
+    position: fixed;
+    height: 100%;
+    top: 70px;
+    padding-top: 50px;
 }
 
-.top-menu > a {
-    width: 80px;
-    height: 80px;
-    float: left;
-    border: 1px solid #dddfe4;
-    border-radius: 100%;
-    opacity: 0.5;
-    cursor: pointer;
-    margin: 0 20px;
-    background-color: white;
+.left-menu ul {
+    list-style: none;
 }
 
-.top-menu > a :hover {
-    background-color: #BBB5E0;
-    border-radius: 100%;
+.left-menu li {
+    margin-bottom: 30px;
+}
+
+.left-menu i {
+    font-size: 1.8em;
     color: white;
-}
-
-.top-menu > a > img {
-    width: 40px;
-    height: auto;
-    padding: 20px;
-}
-
-.top-menu > a > p {
-    font-weight: bold;
     text-align: center;
-    line-height: 80px;
-    vertical-align: middle;
+    display: block;
 }
 
 .footer {
@@ -120,7 +120,8 @@ button {
 
 #main {
     width: 100%;
-    /*min-height: 800px;*/
+    min-height: 1000px;
+    margin-top: 50px;
     /*background: url('/images/main.jpg') no-repeat center center;*/
 }
 
@@ -132,12 +133,14 @@ button {
 }
 
 .container {
+    margin-top: 120px;
     min-height: 800px;
     padding-left: 0;
     padding-right: 0;
 }
 
 .tagify__input {
+    width: 40%;
     margin: 0 !important;
     height: 25px;
     color: #6C757D;
@@ -145,5 +148,18 @@ button {
 
 .tagify {
     border: none;
+}
 
+.cleaner {
+    clear: both;
+}
+
+.title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+    line-height: 80px;
+    vertical-align: middle;
+    color: #5D5D5D;
+    margin-bottom: 20px;
 }

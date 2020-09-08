@@ -29,22 +29,21 @@
 }
 
 #new-lecture-box-inner {
-    width: 400px;
-    height: 320px;
-    margin: 0 auto;
+    margin: 0 auto 30px auto;
 }
 
 #new-lecture-box-inner-open {
-    cursor: pointer;
+    margin-bottom: 5px;
 }
 
-#new-lecture-box-inner button {
+#new-lecture-box-button {
     width: 100%;
-    height: 40px;
+    height: 50px;
     background-color: #BBB5E0;
     color: white;
     border-radius: 3px;
     margin: 20px auto 0 auto;
+    padding: 0;
 }
 
 .lecture-list {
@@ -56,33 +55,42 @@
 .lecture-list-inner {
     width: 90%;
     margin: 0 auto;
-    background-color: #7EBC9A;
+    background-color: white;
     border-radius: 3px;
+    box-shadow: 0 0 10px #BDBCC2;
+    color: black;
+}
+
+.lecture-list-top {
+    width:100%;
+    height: 60px;
+    background: url('/images/lecture-default.jpg') no-repeat center center;
+    border-top-left-radius: 3px;
 }
 
 .lecture-list-title {
     width: calc(100% - 20px);
-    height: 200px;
-    background-color: #404040;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    height: 50px;
     cursor: pointer;
-    display: table;
-    padding: 0 10px;
+    padding: 10px;
 }
 
 .lecture-list-title > span {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    color: white;
+}
+
+.lecture-list-tags {
+    padding: 10px 10px 0 10px;
+    min-height: 50px;
 }
 
 .lecture-list-bottom {
     width: calc(100% - 20px);
-    height: 30px;
+    height: 25px;
     padding: 10px;
-    color: white;
+    border-top-right-radius: 3px;
 }
 
 .lecture-list-bottom i {
@@ -91,4 +99,25 @@
 
 .lecture-list-bottom-date {
     float: right;
+}
+
+#new-lecture-box-inner form input[type=text] {
+    display: block;
+    width: calc(100% - 25px);
+    height: 35px;
+    margin: 0 40px 0 0;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+
+#new-lecture-box-inner-open input {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin: 4px 5px 0 0;
+}
+
+#new-lecture-box-inner-open label {
+    float: left;
+    cursor: pointer;
 }

@@ -10,6 +10,13 @@
 <br/>
 <div th:replace="common.html :: top-menu"></div>
 <div class="container">
+    <p class="title">강의실</p>
+    <div th:if="${message}" class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+        <span th:text="${message}">완료</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div id="new-lecture-btn-box" sec:authorize="hasAuthority('ADMIN')">
         <a id="new-lecture-btn" class="no-under" href="/lecture/form">등록하기</a>
     </div>
@@ -17,22 +24,32 @@
     <div class="cleaner"></div>
     <div class="row">
         <div class="lecture-list col-sm-4 col-xs-6" th:each="lecture: ${lectures}">
-            <div class="lecture-list-inner">
-                <div class="lecture-list-title">
-                    <span th:text="${lecture.title}"></span>
-                </div>
-                <div class="lecture-list-bottom">
-                    <i class="fa fa-heart-o"></i>
-                    <span th:text="${lecture.likeNum}"></span>
-                    <span class="lecture-list-bottom-date"
-                          th:text="${#temporals.format(lecture.createdDate, 'yy.MM.dd')}"></span>
-                </div>
+            <a th:href="@{'/lecture/detail/' + ${lecture.id}}" class="no-under">
+                <div class="lecture-list-inner">
+                    <div class="lecture-list-top">
+                    </div>
+                    <div class="lecture-list-title">
+                        <span th:text="${lecture.title}"></span>
+                    </div>
+                    <div class="lecture-list-tags">
+                        <span th:each="tag: ${lecture.tags}"
+                              class="font-weight-light text-monospace badge badge-pill badge-info mr-3">
+                            <i class="fa fa-tag"></i> <span th:text="${tag.tag.name}">Tag</span>
+                        </span>
+                    </div>
+                    <div class="lecture-list-bottom">
 
-            </div>
+                        <i class="far fa-heart"></i>
+                        <span th:text="${lecture.likeNum}"></span>
+                        <span class="lecture-list-bottom-date fromNow"
+                              th:text="${lecture.createdDate}"></span>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
     <div class="cleaner"></div>
 </div>
 <div th:replace="common.html :: footer"></div>
-<script th:replace="common.html :: form-validation"></script>
+<div th:replace="common.html :: date-time"></div>
 </html>

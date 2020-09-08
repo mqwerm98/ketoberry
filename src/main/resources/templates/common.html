@@ -11,15 +11,17 @@
     <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="/node_modules/@yaireo/tagify/dist/tagify.css">
     <link rel="stylesheet" href="/node_modules/summernote/dist/summernote-bs4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
     <link href="/css/common.css" rel="stylesheet"/>
 
     <script src="/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/node_modules/jdenticon/dist/jdenticon.min.js"></script>
+<!--    <script src="/node_modules/jdenticon/dist/jdenticon.min.js"></script>-->
     <script src="/js/common.js"></script>
 </head>
 
 <div th:fragment="top-bar" class="top-bar">
+<!--    <i class="fa fa-bars"></i>-->
     <a href="/"><img id="top-bar-logo" src="/images/main-logo.png" alt="logo"/></a>
     <div id="top-bar-right">
         <a href="/login" sec:authorize="!isAuthenticated()">로그인</a>
@@ -37,10 +39,13 @@
 
 </div>
 
-<div th:fragment="top-menu" class="top-menu">
-    <a href="/"><img src="/images/home.png" alt="home"/></a>
-    <a class="no-under" href="/lecture"><p>강의</p></a>
-    <a class="no-under" href="/community"><p>커뮤니티</p></a>
+<div th:fragment="top-menu" class="left-menu">
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li><a class="no-under" href="/lecture"><i class="fas fa-chalkboard-teacher"></i></a></li>
+            <li><a class="no-under" href="/community"><i class="far fa-comment"></i></a></li>
+        </ul>
+    </div>
 </div>
 
 <script type="application/javascript" th:fragment="form-validation">
@@ -67,4 +72,55 @@
 <footer th:fragment="footer" class="footer">
     <small>&copy; KetoBerry Corp.</small>
 </footer>
+
+<script th:fragment="tooltip" type="application/javascript">
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+
+<div th:fragment="editor-script">
+    <script src="/node_modules/summernote/dist/summernote-bs4.js"></script>
+    <script type="application/javascript">
+        $(function () {
+            $('.editor').summernote({
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Noto Sans KR', 'Merriweather'],
+                placeholder: '내용을 입력해 주세요.',
+                tabsize: 2,
+                height: 300
+            });
+        });
+    </script>
+</div>
+
+<div th:fragment="date-time">
+    <script src="/node_modules/moment/min/moment-with-locales.min.js"></script>
+    <script type="application/javascript">
+        $(function () {
+            moment.locale('ko');
+            $(".date-time").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LLL');
+            });
+            $(".date").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LL');
+            });
+            $(".weekday").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('dddd');
+            });
+            $(".time").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LT');
+            });
+            $(".calendar").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").calendar();
+            });
+            $(".fromNow").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").fromNow();
+            });
+            $(".date-weekday-time").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LLLL');
+            });
+        })
+    </script>
+</div>
+
 </html>
